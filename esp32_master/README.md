@@ -1,32 +1,62 @@
-# _Sample project_
+ESP32 Master AP with Buzzer Alert
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+Overview
+This project sets up an ESP32 as a Wi-Fi Access Point (AP) and runs a simple HTTP server. The ESP32 listens for alerts from a slave ESP32 device and activates a buzzer after a 30-second delay when an alert is received.
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+Features
+- Configures ESP32 as an Access Point (AP)
+- Hosts an HTTP server with an `/alert` endpoint
+- Triggers a buzzer 30 seconds after receiving an alert
 
+Components Required
+- ESP32 Development Board
+- Buzzer
+- Power Supply
 
+Wiring
+| ESP32 GPIO | Component |
+|------------|----------|
+| GPIO 27    | Buzzer   |
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+Installation
+1. Clone or copy the project to your ESP32 development environment.
+2. Ensure you have the ESP-IDF (Espressif IoT Development Framework) installed.
+3. Build and flash the firmware to the ESP32:
+   ```sh
+   idf.py build
+   idf.py flash
+   ```
+4. Monitor the ESP32 logs:
+   ```sh
+   idf.py monitor
+   ```
 
-## Example folder contents
+Configuration
+- Update `WIFI_SSID` and `WIFI_PASS` in the code to set your preferred Wi-Fi credentials.
 
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
+How It Works
+1. The ESP32 initializes as an Access Point.
+2. It starts an HTTP server that listens for GET requests on `/alert`.
+3. When an alert request is received, the ESP32:
+   - Logs the alert
+   - Waits 30 seconds
+   - Activates the buzzer for 5 seconds
+4. The buzzer then turns off automatically.
 
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
+HTTP Endpoint
+- URL: `http://<ESP32_AP_IP>/alert`
+- Method: GET
+- Response: `"Alert received"`
 
-Below is short explanation of remaining files in the project folder.
-
+Logs and Debugging
+Use the serial monitor to check logs:
+```sh
+idf.py monitor
 ```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
-```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+Look for messages indicating Wi-Fi setup, alert reception, and buzzer activation.
+
+License
+This project is open-source and can be modified and distributed under the MIT License.
+
+
+

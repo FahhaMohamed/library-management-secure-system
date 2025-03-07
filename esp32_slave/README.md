@@ -1,32 +1,61 @@
-# _Sample project_
+ESP32 Slave with RFID and Motion Detection
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+Overview
+This project configures an ESP32 as a Wi-Fi Station (STA) that connects to a master ESP32 Access Point (AP). The slave ESP32 reads RFID tags and sends the tag data to a PHP server via HTTP POST requests.
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+Features
+- Connects to an ESP32 AP
+- Reads RFID tag data using the RC522 module
+- Sends RFID tag data to a PHP server
 
+Components Required
+- ESP32 Development Board
+- RC522 RFID Module
+- PIR Motion Sensor (Optional)
+- Power Supply
 
+Wiring
+| ESP32 GPIO | Component |
+|------------|----------|
+| GPIO 13    | PIR Sensor (Optional) |
+| SPI Pins   | RC522 RFID Module |
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+Installation
+1. Clone or copy the project to your ESP32 development environment.
+2. Ensure you have the ESP-IDF (Espressif IoT Development Framework) installed.
+3. Build and flash the firmware to the ESP32:
+   ```sh
+   idf.py build
+   idf.py flash
+   ```
+4. Monitor the ESP32 logs:
+   ```sh
+   idf.py monitor
+   ```
 
-## Example folder contents
+Configuration
+- Update `WIFI_SSID` and `WIFI_PASS` to match the master ESP32 AP.
+- Update `SERVER_URL` with the actual PHP server endpoint.
 
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
+How It Works
+1. The ESP32 connects to the master ESP32 AP.
+2. It continuously reads RFID tags using the RC522 module.
+3. When a tag is detected, the ESP32 sends the tag ID to the PHP server using an HTTP POST request.
+4. The data is stored on the server for further processing.
 
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
+Server Communication
+- URL: `http://localhost:5000/store_rfid.php`
+- Method: POST
+- Data Format: `tag_id=<RFID_TAG>`
 
-Below is short explanation of remaining files in the project folder.
-
+Logs and Debugging
+Use the serial monitor to check logs:
+```sh
+idf.py monitor
 ```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
-```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+Look for messages indicating Wi-Fi connection status, RFID tag detection, and HTTP request results.
+
+License
+This project is open-source and can be modified and distributed under the MIT License.
+
+
