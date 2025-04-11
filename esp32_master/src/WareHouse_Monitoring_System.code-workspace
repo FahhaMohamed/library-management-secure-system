@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../../WareHouse_Monitoring_System"
+		},
+		{
+			"name": "g32_esp32_master",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
