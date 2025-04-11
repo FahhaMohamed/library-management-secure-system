@@ -1,56 +1,101 @@
 .dashboard-container {
-    padding: 2rem;
-    background-color: #f7f7f7;
+  padding: 2rem;
+  background-color: #f7f7f7;
+}
+
+.dashboard-title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.dashboard-card {
+  background-color: white;
+  padding: 1.5rem 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 220px;
+}
+
+.dashboard-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.dashboard-card-value {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.dashboard-card-value:nth-child(1) {
+  color: #007bff;
+}
+
+.dashboard-card-value:nth-child(2) {
+  color: #28a745;
+}
+
+.dashboard-card-value:nth-child(3) {
+  color: #dc3545;
+}
+
+/* RFID Section */
+.rfid-section {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.scanner {
+  background-color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.1);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
+  position: relative;
+  text-align: center;
+  min-width: 360px;
+  min-height: 260px;
+}
+
+.pulse {
+  animation: pulseAnim 1s infinite;
+}
+
+@keyframes pulseAnim {
+  0% {
+    box-shadow: 0 0 0 0 #00000080;
   }
-  
-  .dashboard-title {
-    font-size: 1.75rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
   }
-  
-  .dashboard-cards {
-    
-    display: flex;
-    justify-content:center ;
-    
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
   }
-  
-  @media (min-width: 768px) {
-    .dashboard-cards {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  
-  .dashboard-card {
-    background-color: white;
-    padding: 1.5rem 2.5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .dashboard-card-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
-  
-  .dashboard-card-value {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  
-  .dashboard-card-value:nth-child(1) {
-    color: #007bff;
-  }
-  
-  .dashboard-card-value:nth-child(2) {
-    color: #28a745;
-  }
-  
-  .dashboard-card-value:nth-child(3) {
-    color: #dc3545;
-  }
-  
+}
+
+.nav-button {
+  padding: 0.6rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #0056b3;
+}
+

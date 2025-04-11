@@ -14,8 +14,8 @@ function App() {
       <div className="app-container">
         <Navbar />
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          {/* <Route path="/" element={<LoginPage />} /> */}
+          <Route path="/" element={<Dashboard />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/register-user" element={<RegisterUser />} />
           <Route path="/register-book" element={<RegisterBook />} />
